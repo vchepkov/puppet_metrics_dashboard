@@ -43,12 +43,12 @@ class puppet_metrics_dashboard::grafana {
     }
   }
 
-  $_grafana_cfg = $grafana_cfg.merge({
+  $_grafana_cfg = $grafana_cfg.deep_merge({
     'security' => {
       'admin_user'     => 'admin',
       'admin_password' => $puppet_metrics_dashboard::grafana_password,
     }
-  }).merge($ldap_cfg).merge($puppet_metrics_dashboard::grafana_config) # Merge any custom config over the top finally
+  }).deep_merge($ldap_cfg).deep_merge($puppet_metrics_dashboard::grafana_config) # Merge any custom config over the top finally
 
   class { 'grafana':
     install_method      => 'repo',
